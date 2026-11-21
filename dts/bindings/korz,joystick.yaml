@@ -1,0 +1,25 @@
+# Analog thumb joystick read through the ADC, reported as a Zephyr input device
+# (relative X/Y or wheel events plus a button). Pair it with a `zmk,input-listener`.
+description: Analog joystick (two ADC axes and an optional push button)
+
+compatible: "korz,joystick"
+
+include: base.yaml
+
+properties:
+  io-channels:
+    type: phandle-array
+    required: true
+    description: ADC channels, first the X axis (VRx), then the Y axis (VRy)
+  button-gpios:
+    type: phandle-array
+    description: Push button (SW). Use GPIO_ACTIVE_LOW | GPIO_PULL_UP for a button to ground.
+  invert-x:
+    type: boolean
+    description: Reverse the direction of the X axis
+  invert-y:
+    type: boolean
+    description: Reverse the direction of the Y axis
+  swap-xy:
+    type: boolean
+    description: Swap the two axes (joystick mounted rotated by 90 degrees)
